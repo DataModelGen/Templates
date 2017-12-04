@@ -6,7 +6,7 @@ dist: trusty
 install:
 - sh ./Scripts/install_swift.sh
 script:
-- zip Templates.zip Templates
+- zip -r Templates.zip Templates
 before_deploy:
 - git config --local user.name "Allan Vialatte"
 - git config --local user.email "allan.vialatte@icloud.com"
