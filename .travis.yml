@@ -1,0 +1,20 @@
+os: linux
+env: SWIFT_VERSION=4.0
+language: generic
+sudo: required
+dist: trusty
+install:
+- sh ./Scripts/install_swift.sh
+script:
+- zip Templates.zip Templates
+before_deploy:
+- git config --local user.name "Allan Vialatte"
+- git config --local user.email "allan.vialatte@icloud.com"
+- git tag "$(date +'%Y%m%d%H%M%S')-$(git log --format=%h -1)"
+deploy:
+  provider: releases
+  api_key:
+    secure: s7CQEdY3P4cl/R9/n8icGmX/C5CJrBbiy3ulV37FfWvtQjp3FzF8RNGk6k5w7P8WEy32FKubxLc9CD9MnxJc3DvLkPv5s/pLRoi8fRb9b6sDoOcjTnswPACA684KMwk320wxGz/5/oH8VqW23HzQPLirNdbOTMnMjYIGOEbihCNXHdOixuBW1x1AN8Ti8B+ozpAEIb2h2Y2hYuLr3JDPOlfjRDyOSU+MpObepreZXzZXKoa6JxNilXeWMkTJGiwgZuDIVw5hawRf6sCVX6ZOQ70ABbRpgbEO5q+p19LrSWg0cIuYGM+qvoBgbc+5nhiVz69JJAEfcV1MUtfI7imUb1abMUuKV8aKLk0yIOcHekDPqzmRDxmiYkyVo3A40N4YhDBTHRurqm6F9kVqAHo/NKnGvDhth53jjjG/AedAqN2Nq1z1oLOINC+il+TswkYSuzXvCO+WLzLFCd8VVNEDGejASBg1NGDuPrRRHrg6m+wb9UcdJenDDtJhGq4BAYQyLHNfsN/SZjGF7RoQ5VDIMrJ8j3EbgppaQKv4+dcXsMLaJH573whyZuXw54Kf8zaQodTnNx2D6Nd8NiNr735n0BlqNqvY0fZwOxrALT0u1hj7qgOwbmXX0GRcoJ5rj5H3Jdk/X3J+SGzriE5Ik6uLvfjzfWi7/81fR+Jr6FdCURg=
+  file: Templates.zip
+  on:
+    repo: DataModelGen/Templates
